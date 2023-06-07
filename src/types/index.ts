@@ -1,6 +1,6 @@
 export type TFragment = {
-  fragmentSrc: string;
-  id: number;
+  fragmentSrc: string | undefined;
+  id: number | undefined;
 }
 
 export type TFragmentsArray = Array<TFragment>

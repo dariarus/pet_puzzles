@@ -1,30 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React, {FunctionComponent, useEffect, useState} from 'react';
 
 import {TFragmentsArray} from '../../types';
 
 import {MixedFragmentsListItem} from '../mixed-fragments-list-item/mixed-fragments-list-item';
 
-import fragmentContainerStyles from './fragments-container.module.css';
+import fragmentsContainerStyles from './fragments-container.module.css';
 
-export const FragmentsContainer = () => {
-  const [sourceFragments, setSourceFragments] = useState<TFragmentsArray>([]);
-
-  useEffect(() => {
-    const fragments = [...Array(24)]
-      .map((fragment, index) => ({
-        fragmentSrc: `image_part_${index}.jpg`,
-        id: index
-      }))
-      .sort(() => Math.random() - 0.5);
-
-    setSourceFragments(fragments);
-  }, [])
-
+export const FragmentsContainer: FunctionComponent<{sourceFragments: TFragmentsArray}> = (props) => {
   return (
-    <ul className={fragmentContainerStyles.fragmentsContainer}>
+    <ul className={fragmentsContainerStyles.fragmentsContainer}>
       {
-        sourceFragments.map((fragment, index) => (
-          <MixedFragmentsListItem key={fragment.id} puzzleFragment={fragment}/>
+        props.sourceFragments.map((fragment, index) => (
+          <MixedFragmentsListItem key={index} puzzleFragment={fragment}/>
         ))
       }
     </ul>
