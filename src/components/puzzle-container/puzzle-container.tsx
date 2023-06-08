@@ -14,33 +14,33 @@ export const PuzzleContainer = () => {
   const [draggedFragments, setDraggedFragments] = React.useState<Array<TFragment>>([]);
   const [draggedFragment, setDraggedFragment] = React.useState<TFragment>({fragmentSrc: undefined, id: undefined});
 
-  const handleFragmentDrop = (itemId: number, droppedFragmentKey: number) => {
+  const handleFragmentDrop = (itemId: number | undefined) => {
     setFragments([
       ...fragments.filter((fragment) => fragment.id !== itemId)
     ]);
-
-    setDraggedFragments([
-      ...draggedFragments,
-      ...fragments.filter(fragment => fragment.id === itemId)
-    ]);
-    // fragments.map((fragment) => console.log(fragment.id));
-    console.log('draggedFr1: ', draggedFragments);
-    const finalDraggedFragments = draggedFragments.map((fragment, fragmentIndex) =>
-      fragmentIndex === droppedFragmentKey ? draggedFragment : fragment
-    )
-
-    const fragmentWasDragged = draggedFragments.find((fragment, fragmentIndex) => {
-      if (fragment.id === draggedFragment.id) return {fragmentSrc: undefined, id: undefined};
-      return fragmentIndex === itemId ? draggedFragment : fragment;
-    })
-
-    setDraggedFragments(
-      finalDraggedFragments
-    );
-    console.log('draggedFr2: ', draggedFragments);
-    if (fragmentWasDragged) {
-      setDraggedFragment(fragmentWasDragged);
-    }
+  console.log('frAfterDrag: ', fragments)
+    // setDraggedFragments([
+    //   ...draggedFragments,
+    //   ...fragments.filter(fragment => fragment.id === itemId)
+    // ]);
+    // // fragments.map((fragment) => console.log(fragment.id));
+    // console.log('draggedFr1: ', draggedFragments);
+    // const finalDraggedFragments = draggedFragments.map((fragment, fragmentIndex) =>
+    //   fragmentIndex === droppedFragmentKey ? draggedFragment : fragment
+    // )
+    //
+    // const fragmentWasDragged = draggedFragments.find((fragment, fragmentIndex) => {
+    //   if (fragment.id === draggedFragment.id) return {fragmentSrc: undefined, id: undefined};
+    //   return fragmentIndex === itemId ? draggedFragment : fragment;
+    // })
+    //
+    // setDraggedFragments(
+    //   finalDraggedFragments
+    // );
+    // console.log('draggedFr2: ', draggedFragments);
+    // if (fragmentWasDragged) {
+    //   setDraggedFragment(fragmentWasDragged);
+    // }
   };
 
   useEffect(() => {

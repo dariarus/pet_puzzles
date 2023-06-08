@@ -7,21 +7,21 @@ import {useDrop} from 'react-dnd';
 
 export const FinishedImageFragmentsList: FunctionComponent<{
   puzzleFragment: TFragment,
-  onDropFragmentHandler: (itemId: number, droppedFragmentKey: number) => void,
-  itemId: number, droppedFragmentKey: number
+  // onDropFragmentHandler: (itemId: number, droppedFragmentKey: number) => void,
 }> = (props) => {
-  const [{isOver}, dropRef] = useDrop({
-    accept: 'fragment',
-    drop: () => {
-      props.onDropFragmentHandler(props.itemId, props.droppedFragmentKey);
-    },
-    collect: (monitor) => ({
-      isOver: monitor.isOver()
-    })
-  })
+  // const [{isOver}, dropRef] = useDrop({
+  //   accept: 'fragment',
+  //   drop: () => {
+  //     props.onDropFragmentHandler(props.itemId, props.droppedFragmentKey);
+  //   },
+  //   collect: (monitor) => ({
+  //     isOver: monitor.isOver()
+  //   })
+  // })
 
   return (
-    <li ref={dropRef}
+    // <li ref={dropRef}
+    <li
         className={finishedImageFragmentsListStyles.puzzleItem}>
       {
         props.puzzleFragment &&

@@ -5,9 +5,7 @@ import {useDrag} from 'react-dnd';
 export const MixedFragmentsListItem: FunctionComponent<{ puzzleFragment: TFragment }> = (props) => {
   const [{isDragging}, dragRef] = useDrag({
     type: 'fragment',
-    item: () => {
-      return {index: props.puzzleFragment.id}
-    },
+    item: props.puzzleFragment,
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     })
