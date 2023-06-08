@@ -14,33 +14,23 @@ export const PuzzleContainer = () => {
   const [draggedFragments, setDraggedFragments] = React.useState<Array<TFragment>>([]);
   const [draggedFragment, setDraggedFragment] = React.useState<TFragment>({fragmentSrc: undefined, id: undefined});
 
-  const handleFragmentDrop = (itemId: number, droppedFragmentKey: number) => {
+  const handleFragmentDrop = (itemId: number) => {
     setFragments([
       ...fragments.filter((fragment) => fragment.id !== itemId)
     ]);
+    console.log('fragments: ', fragments);
 
     setDraggedFragments([
       ...draggedFragments,
       ...fragments.filter(fragment => fragment.id === itemId)
     ]);
-    // fragments.map((fragment) => console.log(fragment.id));
+
     console.log('draggedFr1: ', draggedFragments);
-    const finalDraggedFragments = draggedFragments.map((fragment, fragmentIndex) =>
-      fragmentIndex === droppedFragmentKey ? draggedFragment : fragment
-    )
 
-    const fragmentWasDragged = draggedFragments.find((fragment, fragmentIndex) => {
-      if (fragment.id === draggedFragment.id) return {fragmentSrc: undefined, id: undefined};
-      return fragmentIndex === itemId ? draggedFragment : fragment;
-    })
-
-    setDraggedFragments(
-      finalDraggedFragments
-    );
-    console.log('draggedFr2: ', draggedFragments);
-    if (fragmentWasDragged) {
-      setDraggedFragment(fragmentWasDragged);
-    }
+    // const fragmentWasDragged = draggedFragments.find((fragment, fragmentIndex) => {
+    //   if (fragment.id === draggedFragment.id) return {fragmentSrc: undefined, id: undefined};
+    //   return fragmentIndex === itemId ? draggedFragment : fragment;
+    // })
   };
 
   useEffect(() => {
@@ -53,14 +43,13 @@ export const PuzzleContainer = () => {
 
     // setSourceFragments(fragments);
     setFragments(fragments);
-    console.log(fragments)
   }, [])
 
   return (
     <section className={puzzleContainerStyles.container}>
       <DndProvider backend={HTML5Backend}>
         <FragmentsContainer sourceFragments={fragments}/>
-        <ImageContainer onDropFragmentHandler={handleFragmentDrop} imageFragments={draggedFragments}/>
+        <ImageContainer draggedFragments={draggedFragments} onDropFragment={handleFragmentDrop}/>
       </DndProvider>
     </section>
   )

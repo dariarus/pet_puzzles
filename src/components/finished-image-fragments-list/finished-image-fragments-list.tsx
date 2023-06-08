@@ -3,22 +3,22 @@ import React, {FunctionComponent} from 'react';
 import finishedImageFragmentsListStyles from './finished-image-fragments-list.module.css';
 import imageContainerStyles from '../image-container/image-container.module.css';
 import {TFragment} from '../../types';
-import {useDrop} from 'react-dnd';
+import {DragObjectFactory, useDrop} from 'react-dnd';
 
 export const FinishedImageFragmentsList: FunctionComponent<{
   puzzleFragment: TFragment,
-  onDropFragmentHandler: (itemId: number, droppedFragmentKey: number) => void,
-  itemId: number, droppedFragmentKey: number
+  onDropFragmentHandler: (itemId: number | undefined) => void
 }> = (props) => {
-  const [{isOver}, dropRef] = useDrop({
-    accept: 'fragment',
-    drop: () => {
-      props.onDropFragmentHandler(props.itemId, props.droppedFragmentKey);
-    },
-    collect: (monitor) => ({
-      isOver: monitor.isOver()
+  const [{isOver}, dropRef] = useDrop(() => ({
+      accept: 'fragment',
+      drop: (item: TFragment) => {
+        props.onDropFragmentHandler(item.id)
+      },
+      collect: (monitor) => ({
+        isOver: monitor.isOver()
+      })
     })
-  })
+  )
 
   return (
     <li ref={dropRef}

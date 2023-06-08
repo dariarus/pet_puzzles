@@ -6,39 +6,19 @@ import {TFragment, TFragmentsArray} from '../../types';
 import {useDrop} from 'react-dnd';
 import {FinishedImageFragmentsList} from '../finished-image-fragments-list/finished-image-fragments-list';
 
-export const ImageContainer: FunctionComponent<{
-  onDropFragmentHandler: (itemId: number, droppedFragmentKey: number) => void,
-  imageFragments: TFragmentsArray
-}> = (props) => {
-  // const [imageFragments, setImageFragments] = useState<TFragmentsArray>([]);
-
-  // const [{isOver}, dropRef] = useDrop({
-  //   accept: 'fragment',
-  //   drop: (item: {index: number}) => {
-  //     props.onDropFragmentHandler(item.index);
-  //     console.log('itemInd: ', item.index)
-  //   },
-  //   collect: (monitor) => ({
-  //     isOver: monitor.isOver()
-  //   })
-  // })
-
-  // useEffect(() => {
-  //   const emptyPuzzleData = [...Array(24)];
-  //   setImageFragments([...emptyPuzzleData]);
-  // }, [])
+export const ImageContainer: FunctionComponent<{ draggedFragments: TFragmentsArray, onDropFragment(itemId: number | undefined): void }> = (props) => {
 
   return (
-    // <div ref={dropRef}
-    <div
-         className={imageContainerStyles.container}>
-      <div className={imageContainerStyles['puzzleImage_fox']}>
+    <div className={imageContainerStyles.container}>
+      <ul className={imageContainerStyles['puzzleImage_fox']}>
         {
-          props.imageFragments.map((fragment, index) => (
-            // <FinishedImageFragmentsList key={index} droppedFragmentKey={index} puzzleFragment={fragment}/>
-            <img src={`./fragments/fox_6x4/${fragment.fragmentSrc}`} alt="Фрагмент картинки-пазла"/>
-          ))}
-      </div>
+          props.draggedFragments.map((fragment, index) => (
+            <FinishedImageFragmentsList puzzleFragment={fragment}
+                                        onDropFragmentHandler={props.onDropFragment}
+            />
+          ))
+        }
+      </ul>
     </div>
   )
 }
