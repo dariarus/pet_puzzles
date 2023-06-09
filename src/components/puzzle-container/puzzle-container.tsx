@@ -19,10 +19,10 @@ export const PuzzleContainer = () => {
       ...fragments.filter((fragment) => fragment.id !== itemId)
     ]);
   console.log('frAfterDrag: ', fragments)
-    // setDraggedFragments([
-    //   ...draggedFragments,
-    //   ...fragments.filter(fragment => fragment.id === itemId)
-    // ]);
+    setDraggedFragments([
+      ...draggedFragments,
+      ...fragments.filter(fragment => fragment.id === itemId)
+    ]);
     // // fragments.map((fragment) => console.log(fragment.id));
     // console.log('draggedFr1: ', draggedFragments);
     // const finalDraggedFragments = draggedFragments.map((fragment, fragmentIndex) =>
