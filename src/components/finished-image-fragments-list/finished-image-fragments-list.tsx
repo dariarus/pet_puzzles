@@ -4,7 +4,7 @@ import finishedImageFragmentsListStyles from './finished-image-fragments-list.mo
 import imageContainerStyles from '../image-container/image-container.module.css';
 import {TFragment} from '../../types';
 import {useDrop} from 'react-dnd';
-import {isFragment} from '../../utils/functions';
+import {isTypeFragment} from '../../utils/functions';
 
 export const FinishedImageFragmentsList: FunctionComponent<{
   puzzleFragment: TFragment | {},
@@ -27,7 +27,7 @@ export const FinishedImageFragmentsList: FunctionComponent<{
     <li ref={dropRef}
         className={finishedImageFragmentsListStyles.puzzleItem}>
       {
-        isFragment(props.puzzleFragment) &&
+        isTypeFragment(props.puzzleFragment) &&
         props.puzzleFragment &&
         <img src={`./fragments/fox_6x4/${props.puzzleFragment.fragmentSrc}`} alt="Фрагмент картинки-пазла"/>
       }

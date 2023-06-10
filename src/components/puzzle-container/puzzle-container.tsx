@@ -8,37 +8,37 @@ import {ImageContainer} from '../image-container/image-container';
 import {TFragment, TFragmentsArray} from '../../types';
 
 import puzzleContainerStyles from './puzzle-container.module.css';
-import {isFragment} from '../../utils/functions';
+import {isTypeFragment} from '../../utils/functions';
 
 export const PuzzleContainer = () => {
   const [fragments, setFragments] = React.useState<TFragmentsArray>([]);
   const [draggedFragments, setDraggedFragments] = React.useState<TFragmentsArray>([]);
 
   const handleFragmentDrop = (item: TFragment, draggedFragmentIndex: number) => {
-      setFragments([
-        ...fragments.filter((fragment) => {
-          if (isFragment(fragment)) {
-            return fragment.id !== item.id
-          }
-        })
-      ]);
-
-  // console.log('frAfterDrag: ', fragments)
-  //
-    setDraggedFragments([
-      ...draggedFragments,
-      ...fragments.filter(fragment => {
-        if (isFragment(fragment)) {
-          return fragment.id === item.id
+    setFragments([
+      ...fragments.filter((fragment) => {
+        if (isTypeFragment(fragment)) {
+          return fragment.id !== item.id
         }
       })
     ]);
-    // setDraggedFragments(
-    //   draggedFragments.map((fragment, fragmentIndex) => {
-    //     if (fragment.id === draggedFragmentIndex) return {fragmentSrc: undefined, id: undefined};
-    //     return fragmentIndex === item.id ? item : fragment;
-    //   })
-    // )
+
+    // console.log('frAfterDrag: ', fragments)
+    //
+    //   setDraggedFragments([
+    //     ...draggedFragments,
+    //     ...fragments.filter(fragment => {
+    //       if (isTypeFragment(fragment)) {
+    //         return fragment.id === item.id
+    //       }
+    //     })
+    //   ]);
+    setDraggedFragments(
+      draggedFragments.map((fragment, fragmentIndex) => {
+        if (isTypeFragment(fragment) && fragment.id === draggedFragmentIndex) return {};
+        return fragmentIndex === item.id ? item : fragment;
+      })
+    )
   };
 
   useEffect(() => {
