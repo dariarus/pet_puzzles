@@ -5,41 +5,47 @@ import imageContainerStyles from './image-container.module.css';
 import {TFragment, TFragmentsArray} from '../../types';
 import {useDrop} from 'react-dnd';
 import {FinishedImageFragmentsList} from '../finished-image-fragments-list/finished-image-fragments-list';
+import {isFragment} from '../../utils/functions';
 
 export const ImageContainer: FunctionComponent<{
-  onDropFragmentHandler: (itemId: number | undefined) => void,
+  onDropFragmentHandler: (item: TFragment, draggedFragmentIndex: number) => void,
   imageFragments: TFragmentsArray
 }> = (props) => {
-  // const [imageFragments, setImageFragments] = useState<TFragmentsArray>([]);
 
   const [{isOver}, dropRef] = useDrop({
     accept: 'fragment',
-    drop: (item: TFragment) => {
-      props.onDropFragmentHandler(item.id);
+    drop: (item: TFragment, monitor) => {
+      const draggedItem = monitor.getItem()
+      console.log('draggedItem: ', draggedItem)
+      props.onDropFragmentHandler(item, 0);
 
-      console.log('itemInd: ', item.id)
+
+      // console.log('itemInd: ', item.id)
     },
     collect: (monitor) => ({
-      isOver: monitor.isOver()
+      isOver: monitor.isOver(),
+      item: monitor.getItem(),
+      handlerId: monitor.getHandlerId(),
     })
   })
 
-  // useEffect(() => {
-  //   const emptyPuzzleData = [...Array(24)];
-  //   setImageFragments([...emptyPuzzleData]);
-  // }, [])
-
   return (
-    <div ref={dropRef}
-    // <div
-         className={imageContainerStyles.container}>
-      <div className={imageContainerStyles['puzzleImage_fox']}>
+    // <div ref={dropRef}
+    <div
+      className={imageContainerStyles.container}>
+      <ul
+          className={imageContainerStyles['puzzleImage_fox']}>
         {
-          props.imageFragments.map((fragment, index) => (
-            <FinishedImageFragmentsList key={index} puzzleFragment={fragment}/>
+          props.imageFragments.map((fragment, draggedFragmentIndex) => (
+            // isFragment(fragment) &&
+            <FinishedImageFragmentsList key={draggedFragmentIndex}
+                                        puzzleFragment={fragment}
+                                        draggedFragmentIndex={draggedFragmentIndex}
+                                        onDropFragmentHandler={props.onDropFragmentHandler}/>
             // <img src={`./fragments/fox_6x4/${fragment.fragmentSrc}`} alt="Фрагмент картинки-пазла"/>
-          ))}
-      </div>
+          ))
+        }
+      </ul>
     </div>
   )
 }

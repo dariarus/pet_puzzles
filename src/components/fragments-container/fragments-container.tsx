@@ -5,13 +5,14 @@ import {TFragmentsArray} from '../../types';
 import {MixedFragmentsListItem} from '../mixed-fragments-list-item/mixed-fragments-list-item';
 
 import fragmentsContainerStyles from './fragments-container.module.css';
+import {isFragment} from '../../utils/functions';
 
-export const FragmentsContainer: FunctionComponent<{sourceFragments: TFragmentsArray}> = (props) => {
+export const FragmentsContainer: FunctionComponent<{ sourceFragments: TFragmentsArray }> = (props) => {
   return (
     <ul className={fragmentsContainerStyles.fragmentsContainer}>
       {
         props.sourceFragments.map((fragment, index) => (
-          <MixedFragmentsListItem key={index} puzzleFragment={fragment}/>
+          isFragment(fragment) && <MixedFragmentsListItem key={index} puzzleFragment={fragment}/>
         ))
       }
     </ul>

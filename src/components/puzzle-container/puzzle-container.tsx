@@ -8,39 +8,37 @@ import {ImageContainer} from '../image-container/image-container';
 import {TFragment, TFragmentsArray} from '../../types';
 
 import puzzleContainerStyles from './puzzle-container.module.css';
+import {isFragment} from '../../utils/functions';
 
 export const PuzzleContainer = () => {
   const [fragments, setFragments] = React.useState<TFragmentsArray>([]);
-  const [draggedFragments, setDraggedFragments] = React.useState<Array<TFragment>>([]);
-  const [draggedFragment, setDraggedFragment] = React.useState<TFragment>({fragmentSrc: undefined, id: undefined});
+  const [draggedFragments, setDraggedFragments] = React.useState<TFragmentsArray>([]);
 
-  const handleFragmentDrop = (itemId: number | undefined) => {
-    setFragments([
-      ...fragments.filter((fragment) => fragment.id !== itemId)
-    ]);
-  console.log('frAfterDrag: ', fragments)
+  const handleFragmentDrop = (item: TFragment, draggedFragmentIndex: number) => {
+      setFragments([
+        ...fragments.filter((fragment) => {
+          if (isFragment(fragment)) {
+            return fragment.id !== item.id
+          }
+        })
+      ]);
+
+  // console.log('frAfterDrag: ', fragments)
+  //
     setDraggedFragments([
       ...draggedFragments,
-      ...fragments.filter(fragment => fragment.id === itemId)
+      ...fragments.filter(fragment => {
+        if (isFragment(fragment)) {
+          return fragment.id === item.id
+        }
+      })
     ]);
-    // // fragments.map((fragment) => console.log(fragment.id));
-    // console.log('draggedFr1: ', draggedFragments);
-    // const finalDraggedFragments = draggedFragments.map((fragment, fragmentIndex) =>
-    //   fragmentIndex === droppedFragmentKey ? draggedFragment : fragment
-    // )
-    //
-    // const fragmentWasDragged = draggedFragments.find((fragment, fragmentIndex) => {
-    //   if (fragment.id === draggedFragment.id) return {fragmentSrc: undefined, id: undefined};
-    //   return fragmentIndex === itemId ? draggedFragment : fragment;
-    // })
-    //
     // setDraggedFragments(
-    //   finalDraggedFragments
-    // );
-    // console.log('draggedFr2: ', draggedFragments);
-    // if (fragmentWasDragged) {
-    //   setDraggedFragment(fragmentWasDragged);
-    // }
+    //   draggedFragments.map((fragment, fragmentIndex) => {
+    //     if (fragment.id === draggedFragmentIndex) return {fragmentSrc: undefined, id: undefined};
+    //     return fragmentIndex === item.id ? item : fragment;
+    //   })
+    // )
   };
 
   useEffect(() => {
@@ -51,9 +49,12 @@ export const PuzzleContainer = () => {
       }))
       .sort(() => Math.random() - 0.5);
 
-    // setSourceFragments(fragments);
+    const emptyPuzzleData = [...Array(24)].map(() => ({}))
+
     setFragments(fragments);
-    console.log(fragments)
+    setDraggedFragments([...emptyPuzzleData]);
+
+    console.log(draggedFragments)
   }, [])
 
   return (

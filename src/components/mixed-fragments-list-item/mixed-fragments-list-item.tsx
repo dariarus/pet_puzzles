@@ -6,8 +6,18 @@ export const MixedFragmentsListItem: FunctionComponent<{ puzzleFragment: TFragme
   const [{isDragging}, dragRef] = useDrag({
     type: 'fragment',
     item: props.puzzleFragment,
+    end: (item, monitor) => {
+      const dropResult = monitor.getDropResult();
+      const getItem = monitor.getItem();
+      const handlerId = monitor.getHandlerId();
+
+      console.log('dropResult: ', dropResult)
+      console.log('getItem: ', getItem)
+      console.log('handlerId: ', handlerId)
+    },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
+
     })
   })
 
