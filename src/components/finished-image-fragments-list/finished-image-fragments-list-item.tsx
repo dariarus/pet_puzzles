@@ -10,15 +10,20 @@ import {isTypeFragment} from '../../utils/functions';
 export const FinishedImageFragmentsListItem: FunctionComponent<{
   puzzleFragment: TFragment | {},
   draggedFragmentIndex: number
-  onDropFragmentHandler: (itemId: TFragment, droppedFragmentKey: number) => void,
+  onDropFragmentHandler: (item: TFragment, droppedFragmentIndex: number) => void,
 }> = (props) => {
-  const [{isOver}, dropRef] = useDrop({
+  const [{isOver, canDrop}, dropRef] = useDrop({
     accept: 'fragment',
     drop: (item: TFragment, monitor) => {
-      props.onDropFragmentHandler(item, props.draggedFragmentIndex);
+        props.onDropFragmentHandler(item, props.draggedFragmentIndex);
+        console.log(monitor.canDrop())
+    },
+    canDrop: (item: TFragment) => {
+      return item.id !== props.draggedFragmentIndex;
     },
     collect: (monitor) => ({
-      isOver: monitor.isOver()
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop()
     })
   })
 

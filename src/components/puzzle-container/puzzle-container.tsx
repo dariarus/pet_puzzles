@@ -25,10 +25,13 @@ export const PuzzleContainer = () => {
 
     setDraggedFragments(
       draggedFragments.map((dropTargetFragment, dropTargetFragmentIndex) => {
+        if (isTypeFragment(dropTargetFragment) && draggingFragmentIndex === dropTargetFragmentIndex) return dropTargetFragment;
         // Сравниваем правую часть (final image) при отрисовке с самой собой при перетягивании.
         // Если индекс при переборе при отрисовке (т.е. тот фрагмент, на который кидается item) совпадает
         // с индексом при переборе во время handleDrop, вместо бывшего на этом месте пустого места отрисовывается item
-        return dropTargetFragmentIndex === draggingFragmentIndex ? item : dropTargetFragment;
+        if (dropTargetFragmentIndex === draggingFragmentIndex) {
+          return item
+        } else return dropTargetFragment
       })
     )
   };

@@ -12,23 +12,6 @@ export const ImageContainer: FunctionComponent<{
   imageFragments: TFragmentsArray
 }> = (props) => {
 
-  const [{isOver}, dropRef] = useDrop({
-    accept: 'fragment',
-    drop: (item: TFragment, monitor) => {
-      const draggedItem = monitor.getItem()
-      console.log('draggedItem: ', draggedItem)
-      props.onDropFragmentHandler(item, 0);
-
-
-      // console.log('itemInd: ', item.id)
-    },
-    collect: (monitor) => ({
-      isOver: monitor.isOver(),
-      item: monitor.getItem(),
-      handlerId: monitor.getHandlerId(),
-    })
-  })
-
   return (
     <div className={imageContainerStyles.container}>
       <ul className={imageContainerStyles['puzzleImage_fox']}>
@@ -37,8 +20,8 @@ export const ImageContainer: FunctionComponent<{
             <FinishedImageFragmentsListItem key={draggedFragmentIndex}
                                         puzzleFragment={fragment}
                                         draggedFragmentIndex={draggedFragmentIndex}
-                                        onDropFragmentHandler={props.onDropFragmentHandler}/>
-            // <img src={`./fragments/fox_6x4/${fragment.fragmentSrc}`} alt="Фрагмент картинки-пазла"/>
+                                        onDropFragmentHandler={props.onDropFragmentHandler}
+            />
           ))
         }
       </ul>

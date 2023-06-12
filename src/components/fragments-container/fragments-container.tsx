@@ -12,7 +12,8 @@ export const FragmentsContainer: FunctionComponent<{ sourceFragments: TFragments
     <ul className={fragmentsContainerStyles.fragmentsContainer}>
       {
         props.sourceFragments.map((fragment, index) => (
-          isTypeFragment(fragment) && <MixedFragmentsListItem key={index} puzzleFragment={fragment}/>
+          isTypeFragment(fragment) &&
+          <MixedFragmentsListItem key={index} puzzleFragment={fragment}/>
         ))
       }
     </ul>
