@@ -1,22 +1,21 @@
 import React, {FunctionComponent} from 'react';
-
-import finishedImageFragmentsListStyles from './finished-image-fragments-list.module.css';
-import imageContainerStyles from '../image-container/image-container.module.css';
-import {TFragment} from '../../types';
 import {useDrop} from 'react-dnd';
+
+import finishedImageFragmentsListStyles from './finished-image-fragments-list-item.module.css';
+
+import {TFragment} from '../../types';
+
 import {isTypeFragment} from '../../utils/functions';
 
-export const FinishedImageFragmentsList: FunctionComponent<{
+export const FinishedImageFragmentsListItem: FunctionComponent<{
   puzzleFragment: TFragment | {},
   draggedFragmentIndex: number
   onDropFragmentHandler: (itemId: TFragment, droppedFragmentKey: number) => void,
 }> = (props) => {
   const [{isOver}, dropRef] = useDrop({
     accept: 'fragment',
-    drop: (item: TFragment) => {
+    drop: (item: TFragment, monitor) => {
       props.onDropFragmentHandler(item, props.draggedFragmentIndex);
-
-      // console.log('itemInd: ', item.id)
     },
     collect: (monitor) => ({
       isOver: monitor.isOver()
@@ -25,7 +24,8 @@ export const FinishedImageFragmentsList: FunctionComponent<{
 
   return (
     <li ref={dropRef}
-        className={finishedImageFragmentsListStyles.puzzleItem}>
+        className={finishedImageFragmentsListStyles.puzzleItem}
+    >
       {
         isTypeFragment(props.puzzleFragment) &&
         props.puzzleFragment &&
@@ -34,9 +34,3 @@ export const FinishedImageFragmentsList: FunctionComponent<{
     </li>
   )
 }
-
-// <li className={imageContainerStyles.puzzleItem}>
-//   <img src={`./fragments/fox_6x4/${props.puzzleFragment.fragmentSrc}`}
-//        alt="Фрагмент картинки-пазла"
-//        className={imageContainerStyles.listImage}/>
-// </li>

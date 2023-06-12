@@ -14,7 +14,7 @@ export const PuzzleContainer = () => {
   const [fragments, setFragments] = React.useState<TFragmentsArray>([]);
   const [draggedFragments, setDraggedFragments] = React.useState<TFragmentsArray>([]);
 
-  const handleFragmentDrop = (item: TFragment, draggedFragmentIndex: number) => {
+  const handleFragmentDrop = (item: TFragment, draggingFragmentIndex: number) => {
     setFragments([
       ...fragments.filter((fragment) => {
         if (isTypeFragment(fragment)) {
@@ -23,20 +23,12 @@ export const PuzzleContainer = () => {
       })
     ]);
 
-    // console.log('frAfterDrag: ', fragments)
-    //
-    //   setDraggedFragments([
-    //     ...draggedFragments,
-    //     ...fragments.filter(fragment => {
-    //       if (isTypeFragment(fragment)) {
-    //         return fragment.id === item.id
-    //       }
-    //     })
-    //   ]);
     setDraggedFragments(
-      draggedFragments.map((fragment, fragmentIndex) => {
-        if (isTypeFragment(fragment) && fragment.id === draggedFragmentIndex) return {};
-        return fragmentIndex === item.id ? item : fragment;
+      draggedFragments.map((dropTargetFragment, dropTargetFragmentIndex) => {
+        // Сравниваем правую часть (final image) при отрисовке с самой собой при перетягивании.
+        // Если индекс при переборе при отрисовке (т.е. тот фрагмент, на который кидается item) совпадает
+        // с индексом при переборе во время handleDrop, вместо бывшего на этом месте пустого места отрисовывается item
+        return dropTargetFragmentIndex === draggingFragmentIndex ? item : dropTargetFragment;
       })
     )
   };
@@ -52,9 +44,9 @@ export const PuzzleContainer = () => {
     const emptyPuzzleData = [...Array(24)].map(() => ({}))
 
     setFragments(fragments);
-    setDraggedFragments([...emptyPuzzleData]);
 
-    console.log(draggedFragments)
+    // Делаем <ul>, не содержащий элементов <li>, НЕпустым (т.е. содержащим просто <li></li>) - чтобы сделать каждый из li dropTarget-ом
+    setDraggedFragments([...emptyPuzzleData]);
   }, [])
 
   return (

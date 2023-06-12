@@ -4,7 +4,7 @@ import imageContainerStyles from './image-container.module.css';
 
 import {TFragment, TFragmentsArray} from '../../types';
 import {useDrop} from 'react-dnd';
-import {FinishedImageFragmentsList} from '../finished-image-fragments-list/finished-image-fragments-list';
+import {FinishedImageFragmentsListItem} from '../finished-image-fragments-list/finished-image-fragments-list-item';
 import {isTypeFragment} from '../../utils/functions';
 
 export const ImageContainer: FunctionComponent<{
@@ -34,7 +34,7 @@ export const ImageContainer: FunctionComponent<{
       <ul className={imageContainerStyles['puzzleImage_fox']}>
         {
           props.imageFragments.map((fragment, draggedFragmentIndex) => (
-            <FinishedImageFragmentsList key={draggedFragmentIndex}
+            <FinishedImageFragmentsListItem key={draggedFragmentIndex}
                                         puzzleFragment={fragment}
                                         draggedFragmentIndex={draggedFragmentIndex}
                                         onDropFragmentHandler={props.onDropFragmentHandler}/>
