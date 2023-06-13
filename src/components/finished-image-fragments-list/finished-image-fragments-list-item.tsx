@@ -18,8 +18,8 @@ export const FinishedImageFragmentsListItem: FunctionComponent<{
         props.onDropFragmentHandler(item, props.draggedFragmentIndex);
         console.log(monitor.canDrop())
     },
-    canDrop: (item: TFragment) => {
-      return item.id !== props.draggedFragmentIndex;
+    canDrop: () => {
+      return !isTypeFragment(props.puzzleFragment);
     },
     collect: (monitor) => ({
       isOver: monitor.isOver(),
@@ -28,7 +28,7 @@ export const FinishedImageFragmentsListItem: FunctionComponent<{
   })
 
   return (
-    <li ref={dropRef}
+    <li ref={canDrop ? dropRef : undefined}
         className={finishedImageFragmentsListStyles.puzzleItem}
     >
       {
