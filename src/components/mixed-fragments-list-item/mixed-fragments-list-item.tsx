@@ -1,24 +1,17 @@
 import React, {FunctionComponent} from 'react';
 import {TFragment} from '../../types';
 import {useDrag} from 'react-dnd';
+// import {dragRef} from '../../utils/constants';
 
 export const MixedFragmentsListItem: FunctionComponent<{ puzzleFragment: TFragment }> = (props) => {
   const [{isDragging}, dragRef] = useDrag({
     type: 'fragment',
     item: props.puzzleFragment,
-    // end: (item, monitor) => {
-    //   const dropResult = monitor.getDropResult();
-    //   const getItem = monitor.getItem();
-    //   const handlerId = monitor.getHandlerId();
-    //
-    //   console.log('dropResult: ', dropResult)
-    //   console.log('getItem: ', getItem)
-    //   console.log('handlerId: ', handlerId)
-    // },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     })
   })
+  // const dragRefResult = dragRef(props.puzzleFragment)
 
   return (
     <li>
