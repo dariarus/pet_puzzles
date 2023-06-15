@@ -10,13 +10,15 @@ import {isTypeFragment} from '../../utils/functions';
 
 export const FragmentsContainer: FunctionComponent<{ sourceFragments: TFragmentsArray }> = (props) => {
   return (
-    <ul className={fragmentsContainerStyles.fragmentsContainer}>
-      {
-        props.sourceFragments.map((fragment, index) => (
-          isTypeFragment(fragment) &&
-          <MixedFragmentsListItem key={index} puzzleFragment={fragment}/>
-        ))
-      }
-    </ul>
+    <div className={fragmentsContainerStyles.container}>
+      <ul className={fragmentsContainerStyles.fragmentsList}>
+        {
+          props.sourceFragments.map((fragment, index) => (
+            isTypeFragment(fragment) &&
+            <MixedFragmentsListItem key={index} puzzleFragment={fragment}/>
+          ))
+        }
+      </ul>
+    </div>
   )
 }

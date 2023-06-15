@@ -10,7 +10,8 @@
   padding: 0;
   width: 333px; /* в оригинале ширина картинки составляет 66,7% от высоты. 66,7% от 500 будет 333,3 */
   height: 500px;
+  /* затеняем фоновую картинку: */
   background: linear-gradient(rgba(23, 27, 27, .5), rgba(23, 27, 27, .5)), center / contain url(../../images/fox.jpg);
-  box-shadow: 0 0 16px rgba(121, 146, 146, .25), 0 0 8px rgba(127, 146, 146, .25);
+  box-shadow: 0 0 16px rgba(255, 244, 115, .7), 0 0 8px rgba(127, 146, 146, .8);
   list-style: none;
 }

@@ -1,14 +1,18 @@
-.fragmentsContainer {
-  display: grid;
-  grid-template-columns: repeat(6, 83px);
-  grid-template-rows: repeat(6, 83px);
-  justify-content: center;
+.container {
   margin: auto;
-  padding: 0;
-  width: 500px;
-  height: 500px;
+  padding: 10px;
   background-color: #171b1b;
-  box-shadow: 0 0 16px rgba(121, 146, 146, .25), 0 0 8px rgba(127, 146, 146, .25);
+  box-shadow: 0 0 16px rgba(255, 244, 115, .7), 0 0 8px rgba(127, 146, 146, .8);
+}
+
+.fragmentsList {
+  display: grid;
+  grid-template-columns: repeat(4, 83px);
+  grid-template-rows: repeat(4, 83px);
+  gap: 5px;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
   list-style: none;
 }
 

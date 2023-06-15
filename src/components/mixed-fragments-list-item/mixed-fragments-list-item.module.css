@@ -1,0 +1,13 @@
+.puzzleItem {
+  list-style: none;
+  max-height: 83px;
+}
+
+.puzzleImage {
+  padding: 0;
+  width: 83px;
+  height: 83px;
+  object-fit: contain;
+  object-position: center center;
+  display: block;
+}

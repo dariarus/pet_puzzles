@@ -1,6 +1,9 @@
 import React, {FunctionComponent} from 'react';
-import {TFragment} from '../../types';
 import {useDrag} from 'react-dnd';
+
+import mixedFragmentsListItemStyles from './mixed-fragments-list-item.module.css';
+
+import {TFragment} from '../../types';
 
 export const MixedFragmentsListItem: FunctionComponent<{ puzzleFragment: TFragment }> = (props) => {
   const [{isDragging}, dragRef] = useDrag({
@@ -12,12 +15,13 @@ export const MixedFragmentsListItem: FunctionComponent<{ puzzleFragment: TFragme
   })
 
   return (
-    <li>
+    <li className={mixedFragmentsListItemStyles.puzzleItem}>
       {
         !isDragging &&
         <img ref={dragRef}
              src={`./fragments/fox_6x4/${props.puzzleFragment.fragmentSrc}`}
              alt="Фрагмент картинки-пазла"
+             className={mixedFragmentsListItemStyles.puzzleImage}
         />
       }
     </li>
