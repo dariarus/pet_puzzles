@@ -23,18 +23,36 @@ export const PuzzleContainer = () => {
       })
     ]);
 
-    setDraggedFragments(
-      draggedFragments.map((dropTargetFragment, dropTargetFragmentIndex) => {
-        // Если на месте сброса фрагмента в dropTarget уже есть фрагмент, его нельзя заменить на новые
-        if (isTypeFragment(dropTargetFragment)) return dropTargetFragment;
-        // Сравниваем правую часть (final image) при отрисовке с самой собой при перетягивании.
-        // Если индекс при переборе при отрисовке (т.е. тот фрагмент, на который кидается item) совпадает
-        // с индексом при переборе во время handleDrop, вместо бывшего на этом месте пустого места отрисовывается item
-        if (dropTargetFragmentIndex === draggingFragmentIndex) {
-          return item
-        } else return dropTargetFragment
-      })
-    )
+
+    const finalDraggedFragmentsArray = draggedFragments.map((dropTargetFragment, dropTargetFragmentIndex) => {
+      // Если на месте сброса фрагмента в dropTarget уже есть фрагмент, его нельзя заменить на новые
+      if (isTypeFragment(dropTargetFragment)) return dropTargetFragment;
+      // if (isTypeFragment(dropTargetFragment) && dropTargetFragment.id === item.id) return dropTargetFragment;
+      // if ()
+      // Сравниваем правую часть (final image) при отрисовке с самой собой при перетягивании.
+      // Если индекс при переборе при отрисовке (т.е. тот фрагмент, на который кидается item) совпадает
+      // с индексом при переборе во время handleDrop, вместо бывшего на этом месте пустого места отрисовывается item
+      if (dropTargetFragmentIndex === draggingFragmentIndex) {
+        return item
+      } else return dropTargetFragment
+    });
+
+   let  uniqueFragments = [...new Set(finalDraggedFragmentsArray)];
+    setDraggedFragments(uniqueFragments)
+    // setDraggedFragments(
+    //   draggedFragments.map((dropTargetFragment, dropTargetFragmentIndex) => {
+    //     // Если на месте сброса фрагмента в dropTarget уже есть фрагмент, его нельзя заменить на новые
+    //     // if (isTypeFragment(dropTargetFragment)) return dropTargetFragment;
+    //     if (isTypeFragment(dropTargetFragment) && dropTargetFragment.id === item.id) return dropTargetFragment;
+    //     // if ()
+    //     // Сравниваем правую часть (final image) при отрисовке с самой собой при перетягивании.
+    //     // Если индекс при переборе при отрисовке (т.е. тот фрагмент, на который кидается item) совпадает
+    //     // с индексом при переборе во время handleDrop, вместо бывшего на этом месте пустого места отрисовывается item
+    //     if (dropTargetFragmentIndex === draggingFragmentIndex) {
+    //       return item
+    //     } else return dropTargetFragment
+    //   })
+    // )
   };
 
   useEffect(() => {
@@ -49,7 +67,7 @@ export const PuzzleContainer = () => {
 
     setFragments(fragments);
 
-    // Делаем <ul>, не содержащий элементов <li>, НЕпустым (т.е. содержащим просто <li></li>) - чтобы сделать каждый из li dropTarget-ом
+    // Делаем ранее пустой <ul>, НЕпустым (т.е. содержащим просто много <li></li>) - чтобы сделать каждый из li dropTarget-ом
     setDraggedFragments([...emptyPuzzleData]);
   }, [])
 
