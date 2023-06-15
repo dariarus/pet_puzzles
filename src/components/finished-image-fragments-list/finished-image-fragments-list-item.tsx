@@ -26,40 +26,22 @@ export const FinishedImageFragmentsListItem: FunctionComponent<{
     })
   })
 
-  const [{isDragging, canDrag}, dragRef] = useDrag({
+  const [{isDragging}, dragRef] = useDrag({
     type: 'fragment',
     item: props.puzzleFragment,
-    // end: (item, monitor) => {
-    //   const dropResult = monitor.getDropResult();
-    //   const getItem = monitor.getItem();
-    //   console.log(dropResult)
-    //   console.log(getItem)
-    // },
-    // canDrag: (monitor) => {
-    //   // const dropResult = monitor.getDropResult();
-    //   const item = monitor.getItem();
-    //   // if (Object.keys(item).includes('id') && Object.keys(props.puzzleFragment).includes('id')) {
-    //     return (item as any).id !== (props.puzzleFragment as any).id
-    //   // } else return true
-    //
-    //
-    //   // else return true
-    // },
     collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-      canDrag: monitor.canDrag()
+      isDragging: monitor.isDragging()
     })
   })
 
   return (
+    // Если на месте сброса фрагмента в dropTarget уже есть фрагмент, его нельзя заменить на новые, сл. там, где есть item, не будет ref-а
     <li ref={canDrop ? dropRef : undefined}
         className={finishedImageFragmentsListStyles.puzzleItem}
     >
       {
         isTypeFragment(props.puzzleFragment) &&
-        // props.puzzleFragment &&
         !isDragging &&
-        // canDrag &&
         <img ref={dragRef}
              src={`./fragments/fox_6x4/${props.puzzleFragment.fragmentSrc}`} alt="Фрагмент картинки-пазла"/>
       }

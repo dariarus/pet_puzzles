@@ -2,9 +2,10 @@ import React, {FunctionComponent, useEffect, useState} from 'react';
 
 import {TFragmentsArray} from '../../types';
 
+import fragmentsContainerStyles from './fragments-container.module.css';
+
 import {MixedFragmentsListItem} from '../mixed-fragments-list-item/mixed-fragments-list-item';
 
-import fragmentsContainerStyles from './fragments-container.module.css';
 import {isTypeFragment} from '../../utils/functions';
 
 export const FragmentsContainer: FunctionComponent<{ sourceFragments: TFragmentsArray }> = (props) => {

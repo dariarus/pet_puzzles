@@ -1,13 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {DndProvider} from 'react-dnd';
 import {HTML5Backend} from 'react-dnd-html5-backend';
+
+import puzzleContainerStyles from './puzzle-container.module.css';
+
+import {TFragment, TFragmentsArray} from '../../types';
 
 import {FragmentsContainer} from '../fragments-container/fragments-container';
 import {ImageContainer} from '../image-container/image-container';
 
-import {TFragment, TFragmentsArray} from '../../types';
-
-import puzzleContainerStyles from './puzzle-container.module.css';
 import {isTypeFragment} from '../../utils/functions';
 
 export const PuzzleContainer = () => {
@@ -23,14 +24,8 @@ export const PuzzleContainer = () => {
       })
     ]);
 
-
-    // const finalDraggedFragmentsArray = draggedFragments.map((dropTargetFragment, dropTargetFragmentIndex) => {
-   setDraggedFragments(draggedFragments.map((dropTargetFragment, dropTargetFragmentIndex) => {
-     if (isTypeFragment(dropTargetFragment) && (dropTargetFragment.id === item.id)) return {};
-      // Если на месте сброса фрагмента в dropTarget уже есть фрагмент, его нельзя заменить на новые
-      // if (isTypeFragment(dropTargetFragment)) return dropTargetFragment;
-      // if (isTypeFragment(dropTargetFragment) && dropTargetFragment.id === item.id) return dropTargetFragment;
-      // if ()
+    setDraggedFragments(draggedFragments.map((dropTargetFragment, dropTargetFragmentIndex) => {
+      if (isTypeFragment(dropTargetFragment) && (dropTargetFragment.id === item.id)) return {};
       // Сравниваем правую часть (final image) при отрисовке с самой собой при перетягивании.
       // Если индекс при переборе при отрисовке (т.е. тот фрагмент, на который кидается item) совпадает
       // с индексом при переборе во время handleDrop, вместо бывшего на этом месте пустого места отрисовывается item
@@ -38,24 +33,6 @@ export const PuzzleContainer = () => {
         return item
       } else return dropTargetFragment
     }));
-
-   // let  uniqueFragments = [...new Set(finalDraggedFragmentsArray)];
-   //  setDraggedFragments(uniqueFragments)
-   //  console.log(uniqueFragments)
-    // setDraggedFragments(
-    //   draggedFragments.map((dropTargetFragment, dropTargetFragmentIndex) => {
-    //     // Если на месте сброса фрагмента в dropTarget уже есть фрагмент, его нельзя заменить на новые
-    //     // if (isTypeFragment(dropTargetFragment)) return dropTargetFragment;
-    //     if (isTypeFragment(dropTargetFragment) && dropTargetFragment.id === item.id) return dropTargetFragment;
-    //     // if ()
-    //     // Сравниваем правую часть (final image) при отрисовке с самой собой при перетягивании.
-    //     // Если индекс при переборе при отрисовке (т.е. тот фрагмент, на который кидается item) совпадает
-    //     // с индексом при переборе во время handleDrop, вместо бывшего на этом месте пустого места отрисовывается item
-    //     if (dropTargetFragmentIndex === draggingFragmentIndex) {
-    //       return item
-    //     } else return dropTargetFragment
-    //   })
-    // )
   };
 
   useEffect(() => {

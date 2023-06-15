@@ -3,9 +3,8 @@ import React, {FunctionComponent, useEffect, useState} from 'react';
 import imageContainerStyles from './image-container.module.css';
 
 import {TFragment, TFragmentsArray} from '../../types';
-import {useDrop} from 'react-dnd';
+
 import {FinishedImageFragmentsListItem} from '../finished-image-fragments-list/finished-image-fragments-list-item';
-import {isTypeFragment} from '../../utils/functions';
 
 export const ImageContainer: FunctionComponent<{
   onDropFragmentHandler: (item: TFragment, draggedFragmentIndex: number) => void,
