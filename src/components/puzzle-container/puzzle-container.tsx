@@ -24,9 +24,11 @@ export const PuzzleContainer = () => {
     ]);
 
 
-    const finalDraggedFragmentsArray = draggedFragments.map((dropTargetFragment, dropTargetFragmentIndex) => {
+    // const finalDraggedFragmentsArray = draggedFragments.map((dropTargetFragment, dropTargetFragmentIndex) => {
+   setDraggedFragments(draggedFragments.map((dropTargetFragment, dropTargetFragmentIndex) => {
+     if (isTypeFragment(dropTargetFragment) && (dropTargetFragment.id === item.id)) return {};
       // Если на месте сброса фрагмента в dropTarget уже есть фрагмент, его нельзя заменить на новые
-      if (isTypeFragment(dropTargetFragment)) return dropTargetFragment;
+      // if (isTypeFragment(dropTargetFragment)) return dropTargetFragment;
       // if (isTypeFragment(dropTargetFragment) && dropTargetFragment.id === item.id) return dropTargetFragment;
       // if ()
       // Сравниваем правую часть (final image) при отрисовке с самой собой при перетягивании.
@@ -35,10 +37,11 @@ export const PuzzleContainer = () => {
       if (dropTargetFragmentIndex === draggingFragmentIndex) {
         return item
       } else return dropTargetFragment
-    });
+    }));
 
-   let  uniqueFragments = [...new Set(finalDraggedFragmentsArray)];
-    setDraggedFragments(uniqueFragments)
+   // let  uniqueFragments = [...new Set(finalDraggedFragmentsArray)];
+   //  setDraggedFragments(uniqueFragments)
+   //  console.log(uniqueFragments)
     // setDraggedFragments(
     //   draggedFragments.map((dropTargetFragment, dropTargetFragmentIndex) => {
     //     // Если на месте сброса фрагмента в dropTarget уже есть фрагмент, его нельзя заменить на новые
