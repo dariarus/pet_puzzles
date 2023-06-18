@@ -25,6 +25,7 @@ export const PuzzleContainer = () => {
     ]);
 
     setDraggedFragments(draggedFragments.map((dropTargetFragment, dropTargetFragmentIndex) => {
+      // Запретить копирование фрагмента, перетаскиваемого внутри фрейма с финальным пазлом:
       if (isTypeFragment(dropTargetFragment) && (dropTargetFragment.id === item.id)) return {};
       // Сравниваем правую часть (final image) при отрисовке с самой собой при перетягивании.
       // Если индекс при переборе при отрисовке (т.е. тот фрагмент, на который кидается item) совпадает
@@ -34,6 +35,23 @@ export const PuzzleContainer = () => {
       } else return dropTargetFragment
     }));
   };
+
+  const handleFragmentDropBack = (item: TFragment, draggingFragmentIndex: number) => {
+    setFragments([
+      ...fragments,
+      ...draggedFragments.filter((fragment) => {
+        if (isTypeFragment(fragment)) {
+          return fragment.id === item.id
+        }
+      })
+    ]);
+
+    setDraggedFragments(draggedFragments.map((dropTargetFragment, dropTargetFragmentIndex) => {
+        if (isTypeFragment(dropTargetFragment) && dropTargetFragment.id === item.id) {
+          return {}
+        } else return dropTargetFragment
+      }))
+  }
 
   useEffect(() => {
     const fragments = [...Array(24)]
@@ -54,7 +72,7 @@ export const PuzzleContainer = () => {
   return (
     <section className={puzzleContainerStyles.container}>
       <DndProvider backend={HTML5Backend}>
-        <FragmentsContainer sourceFragments={fragments}/>
+        <FragmentsContainer onDropFragmentBackHandler={handleFragmentDropBack} sourceFragments={fragments}/>
         <ImageContainer onDropFragmentHandler={handleFragmentDrop} imageFragments={draggedFragments}/>
       </DndProvider>
     </section>
