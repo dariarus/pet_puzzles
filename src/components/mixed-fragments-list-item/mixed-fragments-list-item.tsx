@@ -1,23 +1,11 @@
-import React, {FunctionComponent} from 'react';
+import React, {FunctionComponent, LegacyRef} from 'react';
 import {useDrag, useDrop} from 'react-dnd';
 
 import mixedFragmentsListItemStyles from './mixed-fragments-list-item.module.css';
 
 import {TFragment} from '../../types';
-import {isTypeFragment} from '../../utils/functions';
 
-export const MixedFragmentsListItem: FunctionComponent<{
-  puzzleFragment: TFragment,
-  draggedFragmentIndex: number
-  onDropBackFragmentHandler: (item: TFragment, droppedFragmentIndex: number) => void
-}> = (props) => {
-  const [, dropBackRef] = useDrop({
-    accept: 'fragment',
-    drop: (item: TFragment) => {
-      props.onDropBackFragmentHandler(item, props.draggedFragmentIndex);
-    }
-  })
-
+export const MixedFragmentsListItem: FunctionComponent<{ puzzleFragment: TFragment }> = (props) => {
   const [{isDragging}, dragRef] = useDrag({
     type: 'fragment',
     item: props.puzzleFragment,
@@ -27,8 +15,7 @@ export const MixedFragmentsListItem: FunctionComponent<{
   })
 
   return (
-    <li ref={dropBackRef}
-      className={mixedFragmentsListItemStyles.puzzleItem}>
+    <li className={mixedFragmentsListItemStyles.puzzleItem}>
       {
         !isDragging &&
         <img ref={dragRef}

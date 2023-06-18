@@ -15,7 +15,7 @@ export const PuzzleContainer = () => {
   const [fragments, setFragments] = React.useState<TFragmentsArray>([]);
   const [draggedFragments, setDraggedFragments] = React.useState<TFragmentsArray>([]);
 
-  const handleFragmentDrop = (item: TFragment, draggingFragmentIndex: number) => {
+  const handleDropFragment = (item: TFragment, draggingFragmentIndex: number) => {
     setFragments([
       ...fragments.filter((fragment) => {
         if (isTypeFragment(fragment)) {
@@ -36,7 +36,7 @@ export const PuzzleContainer = () => {
     }));
   };
 
-  const handleFragmentDropBack = (item: TFragment, draggingFragmentIndex: number) => {
+  const handleDropFragmentBack = (item: TFragment) => {
     setFragments([
       ...fragments,
       ...draggedFragments.filter((fragment) => {
@@ -72,8 +72,8 @@ export const PuzzleContainer = () => {
   return (
     <section className={puzzleContainerStyles.container}>
       <DndProvider backend={HTML5Backend}>
-        <FragmentsContainer onDropFragmentBackHandler={handleFragmentDropBack} sourceFragments={fragments}/>
-        <ImageContainer onDropFragmentHandler={handleFragmentDrop} imageFragments={draggedFragments}/>
+        <FragmentsContainer onDropBackFragmentHandler={handleDropFragmentBack} sourceFragments={fragments}/>
+        <ImageContainer onDropFragmentHandler={handleDropFragment} imageFragments={draggedFragments}/>
       </DndProvider>
     </section>
   )
