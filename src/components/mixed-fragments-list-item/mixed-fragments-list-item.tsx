@@ -1,5 +1,5 @@
-import React, {FunctionComponent, LegacyRef} from 'react';
-import {useDrag, useDrop} from 'react-dnd';
+import React, {FunctionComponent} from 'react';
+import {useDrag} from 'react-dnd';
 
 import mixedFragmentsListItemStyles from './mixed-fragments-list-item.module.css';
 

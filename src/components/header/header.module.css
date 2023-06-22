@@ -1,4 +1,17 @@
 .header {
-  height: 70px;
-  background-color: #091818;
+  box-sizing: border-box;
+  padding: 5px 0;
+  background-color: #171b1b;
+}
+
+.heading {
+  margin: 0;
+  font-family: 'TiltPrism', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 65px;
+  line-height: 73px;
+  text-align: center;
+  color: #c0d8d8;
+  text-shadow: 0 0 16px rgba(255, 244, 115, .7), 0 0 8px rgba(127, 146, 146, .8);
 }

@@ -1,0 +1,55 @@
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  box-sizing: border-box;
+  max-width: 470px;
+  max-height: 550px;
+  padding: 20px 15px;
+  background-color: #1c2424;
+  border-radius: 10px;
+  z-index: 4;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+  scrollbar-color: #1c2424 #171b1b; /* «цвет ползунка» «цвет полосы скроллбара» */
+  scrollbar-width: thin;
+}
+
+.popup::-webkit-scrollbar {
+  width: 5px;
+  height: 0;
+  background-color: #1c2424;
+}
+
+/* ползунок скроллбара */
+.popup::-webkit-scrollbar-thumb {
+  background-color: #799292;
+  border-radius: 50px;
+}
+
+.popupHeading {
+  margin: 0 0 20px;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 42px;
+  text-align: center;
+  color: #c0d8d8;
+}
+
+.popupText {
+  max-width: 450px;
+  margin: 0 0 20px;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  color: #c0d8d8;
+}
+
+.popupText:last-of-type {
+  margin: 0;
+}

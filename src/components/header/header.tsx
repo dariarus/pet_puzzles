@@ -4,8 +4,8 @@ import headerStyles from './header.module.css';
 
 export const Header = () => {
   return (
-    <div className={headerStyles.header}>
-
-    </div>
+    <header className={headerStyles.header}>
+      <h1 className={headerStyles.heading}>Puzzles Game</h1>
+    </header>
   )
 }

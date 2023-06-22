@@ -1,4 +1,9 @@
 .container {
-  margin: auto;
+  display: flex;
+  margin: 60px auto 0;
   width: 1270px;
+}
+
+.buttonsWrap {
+  margin: 0 70px 0 0;
 }
