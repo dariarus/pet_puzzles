@@ -1,3 +1,7 @@
+.bodyOverlay {
+  overflow: hidden;
+}
+
 .container {
   display: flex;
   margin: 60px auto 0;

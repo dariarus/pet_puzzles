@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {FunctionComponent} from 'react';
 
 import popupCrossStyles from './popup-cross.module.css';
 
-export const PopupCross = () => {
+export const PopupCross: FunctionComponent<{ onClose: () => void }> = (props) => {
   return (
-    <button className={popupCrossStyles.icon}>
-      {/*<img className={popupCrossStyles.icon} src={crossIcon} alt="Иконка крестик"/>*/}
+    <button className={popupCrossStyles.icon} onClick={() => {
+      props.onClose()
+    }}>
     </button>
 
   )
