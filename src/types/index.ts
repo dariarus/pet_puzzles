@@ -4,3 +4,10 @@ export type TFragment = {
 }
 
 export type TFragmentsArray = Array<TFragment | {}>
+
+export type TPuzzleContainer = {
+  fragments: TFragmentsArray;
+  draggedFragments: TFragmentsArray;
+  handleDropFragment: (item: TFragment, draggingFragmentIndex: number) => void;
+  handleDropFragmentBack: (item: TFragment) => void;
+}
