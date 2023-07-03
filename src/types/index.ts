@@ -10,4 +10,11 @@ export type TPuzzleContainer = {
   draggedFragments: TFragmentsArray;
   handleDropFragment: (item: TFragment, draggingFragmentIndex: number) => void;
   handleDropFragmentBack: (item: TFragment) => void;
+  imageName: string
 }
+
+export enum AnimalPicture {
+  FOX = 'fox',
+  BEAR = 'bear'
+}
+

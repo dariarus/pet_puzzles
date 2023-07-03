@@ -15,8 +15,14 @@ export const PuzzleContainer: FunctionComponent<TPuzzleContainer> = (props) => {
   return (
     <section className={puzzleContainerStyles.container}>
       <DndProvider backend={HTML5Backend}>
-        <FragmentsContainer onDropBackFragmentHandler={props.handleDropFragmentBack} sourceFragments={props.fragments}/>
-        <ImageContainer onDropFragmentHandler={props.handleDropFragment} imageFragments={props.draggedFragments}/>
+        <FragmentsContainer onDropBackFragmentHandler={props.handleDropFragmentBack}
+                            sourceFragments={props.fragments}
+                            imageName={props.imageName}
+        />
+        <ImageContainer onDropFragmentHandler={props.handleDropFragment}
+                        imageFragments={props.draggedFragments}
+                        imageName={props.imageName}
+        />
       </DndProvider>
     </section>
   )

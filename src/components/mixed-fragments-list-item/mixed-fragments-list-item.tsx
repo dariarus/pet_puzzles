@@ -5,7 +5,7 @@ import mixedFragmentsListItemStyles from './mixed-fragments-list-item.module.css
 
 import {TFragment} from '../../types';
 
-export const MixedFragmentsListItem: FunctionComponent<{ puzzleFragment: TFragment }> = (props) => {
+export const MixedFragmentsListItem: FunctionComponent<{ puzzleFragment: TFragment, imageName: string }> = (props) => {
   const [{isDragging}, dragRef] = useDrag({
     type: 'fragment',
     item: props.puzzleFragment,
@@ -19,7 +19,7 @@ export const MixedFragmentsListItem: FunctionComponent<{ puzzleFragment: TFragme
       {
         !isDragging &&
         <img ref={dragRef}
-             src={`./fragments/fox_6x4/${props.puzzleFragment.fragmentSrc}`}
+             src={`./fragments/${props.imageName}/${props.puzzleFragment.fragmentSrc}`}
              alt="Фрагмент картинки-пазла"
              className={mixedFragmentsListItemStyles.puzzleImage}
         />

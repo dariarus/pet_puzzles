@@ -11,7 +11,8 @@ import {useDrop} from 'react-dnd';
 
 export const FragmentsContainer: FunctionComponent<{
   sourceFragments: TFragmentsArray,
-  onDropBackFragmentHandler: (item: TFragment) => void
+  onDropBackFragmentHandler: (item: TFragment) => void,
+  imageName: string
 }> = (props) => {
 
   const [, dropBackRef] = useDrop({
@@ -28,7 +29,7 @@ export const FragmentsContainer: FunctionComponent<{
         {
           props.sourceFragments.map((fragment, index) => (
             isTypeFragment(fragment) &&
-            <MixedFragmentsListItem key={index} puzzleFragment={fragment}/>
+            <MixedFragmentsListItem key={index} puzzleFragment={fragment} imageName={props.imageName}/>
           ))
         }
       </ul>

@@ -8,7 +8,8 @@ import {FinishedImageFragmentsListItem} from '../finished-image-fragments-list/f
 
 export const ImageContainer: FunctionComponent<{
   onDropFragmentHandler: (item: TFragment, draggedFragmentIndex: number) => void,
-  imageFragments: TFragmentsArray
+  imageFragments: TFragmentsArray,
+  imageName: string
 }> = (props) => {
 
   return (
@@ -17,9 +18,10 @@ export const ImageContainer: FunctionComponent<{
         {
           props.imageFragments.map((fragment, draggedFragmentIndex) => (
             <FinishedImageFragmentsListItem key={draggedFragmentIndex}
-                                        puzzleFragment={fragment}
-                                        draggedFragmentIndex={draggedFragmentIndex}
-                                        onDropFragmentHandler={props.onDropFragmentHandler}
+                                            puzzleFragment={fragment}
+                                            draggedFragmentIndex={draggedFragmentIndex}
+                                            onDropFragmentHandler={props.onDropFragmentHandler}
+                                            imageName={props.imageName}
             />
           ))
         }

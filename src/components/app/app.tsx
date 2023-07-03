@@ -9,21 +9,27 @@ import {Popup} from '../popup/popup';
 
 import {TFragment, TFragmentsArray} from '../../types';
 
-import {isTypeFragment} from '../../utils/functions';
+import {defineArrayPartsNumber, getRandomImage, isTypeFragment} from '../../utils/functions';
 
 export const App = () => {
   const [fragments, setFragments] = useState<TFragmentsArray>([]);
+  const [initialImage, setInitialImage] = useState<string>('');
+  const [initialArrayLength, setInitialArrayLength] = useState<number>(0);
   const [draggedFragments, setDraggedFragments] = useState<TFragmentsArray>([]);
   const [popupIsOpen, setPopupIsOpen] = useState<boolean>(false);
 
-  const fragmentsInitialState = [...Array(24)]
+  let randomImage = 'bear'
+  let arrayLength
+
+  const fragmentsInitialState = [...Array(initialArrayLength)]
     .map((fragment, index) => ({
       fragmentSrc: `image_part_${index}.jpg`,
       id: index
     }))
     .sort(() => Math.random() - 0.5);
+  console.log(fragmentsInitialState)
 
-  const emptyPuzzleData = [...Array(24)].map(() => ({}))
+  const emptyPuzzleData = [...Array(initialArrayLength)].map(() => ({}))
 
   const handleDropFragment = (item: TFragment, draggingFragmentIndex: number) => {
     setFragments([
@@ -77,13 +83,18 @@ export const App = () => {
 
   const setInitialState = () => {
     setFragments(fragmentsInitialState);
-
     // Делаем ранее пустой <ul>, НЕпустым (т.е. содержащим просто много <li></li>) - чтобы сделать каждый из li dropTarget-ом
     setDraggedFragments([...emptyPuzzleData]);
+
   }
 
   useEffect(() => {
+    // randomImage = getRandomImage();
+    // arrayLength = defineArrayPartsNumber(randomImage);
     setInitialState();
+    setInitialImage(getRandomImage);
+    setInitialArrayLength(defineArrayPartsNumber(initialImage))
+    console.log(initialArrayLength)
   }, []);
 
   return (
@@ -99,6 +110,7 @@ export const App = () => {
                          draggedFragments={draggedFragments}
                          handleDropFragment={handleDropFragment}
                          handleDropFragmentBack={handleDropFragmentBack}
+                         imageName={initialImage}
         />
       </main>
       {

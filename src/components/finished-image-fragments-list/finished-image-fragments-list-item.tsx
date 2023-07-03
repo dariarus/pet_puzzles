@@ -11,6 +11,7 @@ export const FinishedImageFragmentsListItem: FunctionComponent<{
   puzzleFragment: TFragment | {},
   draggedFragmentIndex: number
   onDropFragmentHandler: (item: TFragment, droppedFragmentIndex: number) => void,
+  imageName: string
 }> = (props) => {
   const [{isOver, canDrop}, dropRef] = useDrop({
     accept: 'fragment',
@@ -43,7 +44,7 @@ export const FinishedImageFragmentsListItem: FunctionComponent<{
         isTypeFragment(props.puzzleFragment) &&
         !isDragging &&
         <img ref={dragRef}
-             src={`./fragments/fox_6x4/${props.puzzleFragment.fragmentSrc}`} alt="Фрагмент картинки-пазла"/>
+             src={`./fragments/${props.imageName}/${props.puzzleFragment.fragmentSrc}`} alt="Фрагмент картинки-пазла"/>
       }
     </li>
   )
