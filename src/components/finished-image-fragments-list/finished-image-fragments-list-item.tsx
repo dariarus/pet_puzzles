@@ -45,9 +45,7 @@ export const FinishedImageFragmentsListItem: FunctionComponent<{
         !isDragging &&
         <img ref={dragRef}
              src={`./fragments/${props.imageName}/${props.puzzleFragment.fragmentSrc}`} alt="Фрагмент картинки-пазла"
-             className={`${finishedImageFragmentsListStyles.puzzleImage} ${props.imageName === AnimalPicture.FOX
-               ? finishedImageFragmentsListStyles.puzzleImage__fox
-               : finishedImageFragmentsListStyles.puzzleImage__bear}`}
+             className={`${finishedImageFragmentsListStyles.puzzleImage} ${finishedImageFragmentsListStyles['puzzleImage__' + props.imageName]}`}
         />
       }
     </li>

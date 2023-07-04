@@ -1,5 +1,6 @@
 .container {
-  margin: 0 210px 0 0;
+  /*margin: 0 210px 0 0;*/
+  margin: 0 ;
   padding: 10px;
   background-color: #171b1b;
   box-shadow: 0 0 16px rgba(255, 244, 115, .7), 0 0 8px rgba(127, 146, 146, .8);
@@ -21,8 +22,8 @@
 
 .fragmentsList__bear {
   display: grid;
-  grid-template-columns: repeat(6, 89px);
-  grid-template-rows: repeat(6, 83px);
+  grid-template-columns: repeat(6, 74px);
+  grid-template-rows: repeat(6, 70px);
   gap: 5px;
 }
 

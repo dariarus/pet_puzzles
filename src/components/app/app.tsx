@@ -14,17 +14,13 @@ import {initialPictureDataArray} from '../../utils/constants';
 
 export const App = () => {
   const [fragments, setFragments] = useState<TFragmentsArray>([]);
-  const [initialImage, setInitialImage] = useState<string>('');
-  const [initialArrayLength, setInitialArrayLength] = useState<number>(0);
   const [draggedFragments, setDraggedFragments] = useState<TFragmentsArray>([]);
   const [popupIsOpen, setPopupIsOpen] = useState<boolean>(false);
 
-  const initialPictureData = useMemo(() =>
+  let initialPictureData = useMemo(() =>
     getRandomPicture(initialPictureDataArray)
   ,[])
-  console.log(initialPictureData)
-  //  picName: 'fox',
-  //  length: 24
+
   const fragmentsInitialState = [...Array(initialPictureData.fragmentsArrayLength)]
     .map((fragment, index) => ({
       fragmentSrc: `image_part_${index}.jpg`,
@@ -85,26 +81,18 @@ export const App = () => {
     document.body.classList.remove(mainStyles.bodyOverlay);
   }
 
-  const resetPuzzleProgress = () => {
+  const setInitialState = () => {
     setFragments(fragmentsInitialState);
     // Делаем ранее пустой <ul>, НЕпустым (т.е. содержащим просто много <li></li>) - чтобы сделать каждый из li dropTarget-ом
     setDraggedFragments([...emptyPuzzleData]);
   }
 
-  const setInitialState = () => {
-
-    setFragments(fragmentsInitialState);
-    // Делаем ранее пустой <ul>, НЕпустым (т.е. содержащим просто много <li></li>) - чтобы сделать каждый из li dropTarget-ом
-    setDraggedFragments([...emptyPuzzleData]);
+  const changePuzzlePicture = () => {
+    return initialPictureData
   }
 
   useEffect(() => {
-
-    setInitialImage(initialPictureData.pictureName);
-    setInitialArrayLength(initialPictureData.fragmentsArrayLength)
-console.log(initialImage)
-    setFragments(fragmentsInitialState);
-    setDraggedFragments([...emptyPuzzleData]);
+    setInitialState();
   }, []);
 
   return (
@@ -113,8 +101,8 @@ console.log(initialImage)
       <main className={mainStyles.container}>
         <section className={mainStyles.buttonsWrap}>
           <Button buttonName="Как играть" onClickHandler={onOpenPopup}/>
-          <Button buttonName="Сбросить" onClickHandler={() => resetPuzzleProgress()}/>
-          <Button buttonName="Сменить картинку" onClickHandler={() => console.log('hi')}/>
+          <Button buttonName="Сбросить" onClickHandler={() => setInitialState()}/>
+          <Button buttonName="Сменить картинку" onClickHandler={() => changePuzzlePicture()}/>
         </section>
         <PuzzleContainer fragments={fragments}
                          draggedFragments={draggedFragments}

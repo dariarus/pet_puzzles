@@ -21,9 +21,7 @@ export const MixedFragmentsListItem: FunctionComponent<{ puzzleFragment: TFragme
         <img ref={dragRef}
              src={`./fragments/${props.imageName}/${props.puzzleFragment.fragmentSrc}`}
              alt="Фрагмент картинки-пазла"
-             className={`${mixedFragmentsListItemStyles.puzzleImag} ${props.imageName === AnimalPicture.FOX
-             ? mixedFragmentsListItemStyles.puzzleImage__fox
-             : mixedFragmentsListItemStyles.puzzleImage__bear}`}
+             className={`${mixedFragmentsListItemStyles.puzzleImag} ${mixedFragmentsListItemStyles['puzzleImage__' + props.imageName]}`}
         />
       }
     </li>
