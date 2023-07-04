@@ -5,9 +5,17 @@
 
 .puzzleImage {
   padding: 0;
-  width: 83px;
-  height: 83px;
   object-fit: contain;
   object-position: center center;
   display: block;
+}
+
+.puzzleImage__fox {
+  width: 83px;
+  height: 83px;
+}
+
+.puzzleImage__bear {
+  width: 89px;
+  height: 83px;
 }

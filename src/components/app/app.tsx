@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 
 import mainStyles from './app.module.css';
 
@@ -9,7 +9,8 @@ import {Popup} from '../popup/popup';
 
 import {TFragment, TFragmentsArray} from '../../types';
 
-import {defineArrayPartsNumber, getRandomImage, isTypeFragment} from '../../utils/functions';
+import {getRandomPicture, isTypeFragment} from '../../utils/functions';
+import {initialPictureDataArray} from '../../utils/constants';
 
 export const App = () => {
   const [fragments, setFragments] = useState<TFragmentsArray>([]);
@@ -18,10 +19,13 @@ export const App = () => {
   const [draggedFragments, setDraggedFragments] = useState<TFragmentsArray>([]);
   const [popupIsOpen, setPopupIsOpen] = useState<boolean>(false);
 
-  let randomImage = 'bear'
-  let arrayLength
-
-  const fragmentsInitialState = [...Array(initialArrayLength)]
+  const initialPictureData = useMemo(() =>
+    getRandomPicture(initialPictureDataArray)
+  ,[])
+  console.log(initialPictureData)
+  //  picName: 'fox',
+  //  length: 24
+  const fragmentsInitialState = [...Array(initialPictureData.fragmentsArrayLength)]
     .map((fragment, index) => ({
       fragmentSrc: `image_part_${index}.jpg`,
       id: index
@@ -29,7 +33,7 @@ export const App = () => {
     .sort(() => Math.random() - 0.5);
   console.log(fragmentsInitialState)
 
-  const emptyPuzzleData = [...Array(initialArrayLength)].map(() => ({}))
+  const emptyPuzzleData = [...Array(initialPictureData.fragmentsArrayLength)].map(() => ({}))
 
   const handleDropFragment = (item: TFragment, draggingFragmentIndex: number) => {
     setFragments([
@@ -81,20 +85,26 @@ export const App = () => {
     document.body.classList.remove(mainStyles.bodyOverlay);
   }
 
-  const setInitialState = () => {
+  const resetPuzzleProgress = () => {
     setFragments(fragmentsInitialState);
     // Делаем ранее пустой <ul>, НЕпустым (т.е. содержащим просто много <li></li>) - чтобы сделать каждый из li dropTarget-ом
     setDraggedFragments([...emptyPuzzleData]);
+  }
 
+  const setInitialState = () => {
+
+    setFragments(fragmentsInitialState);
+    // Делаем ранее пустой <ul>, НЕпустым (т.е. содержащим просто много <li></li>) - чтобы сделать каждый из li dropTarget-ом
+    setDraggedFragments([...emptyPuzzleData]);
   }
 
   useEffect(() => {
-    // randomImage = getRandomImage();
-    // arrayLength = defineArrayPartsNumber(randomImage);
-    setInitialState();
-    setInitialImage(getRandomImage);
-    setInitialArrayLength(defineArrayPartsNumber(initialImage))
-    console.log(initialArrayLength)
+
+    setInitialImage(initialPictureData.pictureName);
+    setInitialArrayLength(initialPictureData.fragmentsArrayLength)
+console.log(initialImage)
+    setFragments(fragmentsInitialState);
+    setDraggedFragments([...emptyPuzzleData]);
   }, []);
 
   return (
@@ -103,14 +113,14 @@ export const App = () => {
       <main className={mainStyles.container}>
         <section className={mainStyles.buttonsWrap}>
           <Button buttonName="Как играть" onClickHandler={onOpenPopup}/>
-          <Button buttonName="Сбросить" onClickHandler={() => setInitialState()}/>
+          <Button buttonName="Сбросить" onClickHandler={() => resetPuzzleProgress()}/>
           <Button buttonName="Сменить картинку" onClickHandler={() => console.log('hi')}/>
         </section>
         <PuzzleContainer fragments={fragments}
                          draggedFragments={draggedFragments}
                          handleDropFragment={handleDropFragment}
                          handleDropFragmentBack={handleDropFragmentBack}
-                         imageName={initialImage}
+                         imageName={initialPictureData.pictureName}
         />
       </main>
       {

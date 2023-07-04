@@ -18,3 +18,7 @@ export enum AnimalPicture {
   BEAR = 'bear'
 }
 
+export type TInitialPictureData = Array<{
+  pictureName: string,
+  fragmentsArrayLength: number,
+}>

@@ -3,7 +3,7 @@ import {useDrag, useDrop} from 'react-dnd';
 
 import finishedImageFragmentsListStyles from './finished-image-fragments-list-item.module.css';
 
-import {TFragment} from '../../types';
+import {AnimalPicture, TFragment} from '../../types';
 
 import {isTypeFragment} from '../../utils/functions';
 
@@ -44,7 +44,11 @@ export const FinishedImageFragmentsListItem: FunctionComponent<{
         isTypeFragment(props.puzzleFragment) &&
         !isDragging &&
         <img ref={dragRef}
-             src={`./fragments/${props.imageName}/${props.puzzleFragment.fragmentSrc}`} alt="Фрагмент картинки-пазла"/>
+             src={`./fragments/${props.imageName}/${props.puzzleFragment.fragmentSrc}`} alt="Фрагмент картинки-пазла"
+             className={`${finishedImageFragmentsListStyles.puzzleImage} ${props.imageName === AnimalPicture.FOX
+               ? finishedImageFragmentsListStyles.puzzleImage__fox
+               : finishedImageFragmentsListStyles.puzzleImage__bear}`}
+        />
       }
     </li>
   )

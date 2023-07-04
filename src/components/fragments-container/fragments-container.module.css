@@ -7,13 +7,23 @@
 
 .fragmentsList {
   display: grid;
-  grid-template-columns: repeat(4, 83px);
-  grid-template-rows: repeat(6, 83px);
   gap: 5px;
   justify-content: center;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.fragmentsList__fox {
+  grid-template-columns: repeat(4, 83px);
+  grid-template-rows: repeat(6, 83px);
+}
+
+.fragmentsList__bear {
+  display: grid;
+  grid-template-columns: repeat(6, 89px);
+  grid-template-rows: repeat(6, 83px);
+  gap: 5px;
 }
 
 .puzzleItem {

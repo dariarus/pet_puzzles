@@ -2,7 +2,7 @@ import React, {FunctionComponent} from 'react';
 
 import imageContainerStyles from './image-container.module.css';
 
-import {TFragment, TFragmentsArray} from '../../types';
+import {AnimalPicture, TFragment, TFragmentsArray} from '../../types';
 
 import {FinishedImageFragmentsListItem} from '../finished-image-fragments-list/finished-image-fragments-list-item';
 
@@ -14,7 +14,9 @@ export const ImageContainer: FunctionComponent<{
 
   return (
     <div className={imageContainerStyles.container}>
-      <ul className={imageContainerStyles['puzzleImage_fox']}>
+      <ul className={`${imageContainerStyles.puzzleImage} ${props.imageName === AnimalPicture.FOX 
+      ? imageContainerStyles['puzzleImage__fox']
+      : imageContainerStyles['puzzleImage__bear']}`}>
         {
           props.imageFragments.map((fragment, draggedFragmentIndex) => (
             <FinishedImageFragmentsListItem key={draggedFragmentIndex}

@@ -1,6 +1,6 @@
 import React, {FunctionComponent} from 'react';
 
-import {TFragment, TFragmentsArray} from '../../types';
+import {AnimalPicture, TFragment, TFragmentsArray} from '../../types';
 
 import fragmentsContainerStyles from './fragments-container.module.css';
 
@@ -25,7 +25,9 @@ export const FragmentsContainer: FunctionComponent<{
   return (
     <div className={fragmentsContainerStyles.container}>
       <ul ref={dropBackRef}
-        className={fragmentsContainerStyles.fragmentsList}>
+        className={`${fragmentsContainerStyles.fragmentsList} ${props.imageName === AnimalPicture.FOX
+        ? fragmentsContainerStyles.fragmentsList__fox
+        : fragmentsContainerStyles.fragmentsList__bear}`}>
         {
           props.sourceFragments.map((fragment, index) => (
             isTypeFragment(fragment) &&
