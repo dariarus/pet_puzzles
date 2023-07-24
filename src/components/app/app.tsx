@@ -16,10 +16,13 @@ export const App = () => {
   const [fragments, setFragments] = useState<TFragmentsArray>([]);
   const [draggedFragments, setDraggedFragments] = useState<TFragmentsArray>([]);
   const [popupIsOpen, setPopupIsOpen] = useState<boolean>(false);
+  const [onClick, setOnClick] = useState<boolean>(false);
 
-  let initialPictureData = useMemo(() =>
-    getRandomPicture(initialPictureDataArray)
-  ,[])
+  const setInitialPictureData = useCallback(() => {
+    return getRandomPicture(initialPictureDataArray)
+  }, [onClick])
+
+  let initialPictureData = useMemo(() => setInitialPictureData(), [])
 
   const fragmentsInitialState = [...Array(initialPictureData.fragmentsArrayLength)]
     .map((fragment, index) => ({
@@ -88,7 +91,8 @@ export const App = () => {
   }
 
   const changePuzzlePicture = () => {
-    return initialPictureData
+    // initialPictureData = getRandomPicture(initialPictureDataArray)
+    setInitialState()
   }
 
   useEffect(() => {
@@ -102,7 +106,11 @@ export const App = () => {
         <section className={mainStyles.buttonsWrap}>
           <Button buttonName="Как играть" onClickHandler={onOpenPopup}/>
           <Button buttonName="Сбросить" onClickHandler={() => setInitialState()}/>
-          <Button buttonName="Сменить картинку" onClickHandler={() => changePuzzlePicture()}/>
+          <Button buttonName="Сменить картинку" onClickHandler={() => {
+            setOnClick(!onClick);
+            setInitialPictureData();
+            setFragments(fragments);
+          }}/>
         </section>
         <PuzzleContainer fragments={fragments}
                          draggedFragments={draggedFragments}

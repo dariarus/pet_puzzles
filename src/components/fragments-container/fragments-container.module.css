@@ -21,10 +21,8 @@
 }
 
 .fragmentsList__bear {
-  display: grid;
   grid-template-columns: repeat(6, 74px);
-  grid-template-rows: repeat(6, 70px);
-  gap: 5px;
+  grid-template-rows: repeat(6, 71px);
 }
 
 .puzzleItem {
