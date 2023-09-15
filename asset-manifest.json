@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/pet_puzzles/static/css/main.b497bd07.css",
+    "main.js": "/pet_puzzles/static/js/main.52da989a.js",
+    "static/js/787.bb86e386.chunk.js": "/pet_puzzles/static/js/787.bb86e386.chunk.js",
+    "static/media/bear.jpg": "/pet_puzzles/static/media/bear.486ac343aa2eb2862bb9.jpg",
+    "static/media/TiltPrism-Regular-VariableFont_XROT,YROT.ttf": "/pet_puzzles/static/media/TiltPrism-Regular-VariableFont_XROT,YROT.a39a32398249debc0671.ttf",
+    "static/media/Inter-Regular.woff": "/pet_puzzles/static/media/Inter-Regular.750b51a29f4c03e0c2db.woff",
+    "static/media/Inter-Regular.woff2": "/pet_puzzles/static/media/Inter-Regular.e1e044bb56329240543c.woff2",
+    "static/media/fox.jpg": "/pet_puzzles/static/media/fox.1dd85bc7d9814e0bebaf.jpg",
+    "index.html": "/pet_puzzles/index.html",
+    "static/media/cross-icon.svg": "/pet_puzzles/static/media/cross-icon.d8cffc5f01dc78029d9f.svg",
+    "main.b497bd07.css.map": "/pet_puzzles/static/css/main.b497bd07.css.map",
+    "main.52da989a.js.map": "/pet_puzzles/static/js/main.52da989a.js.map",
+    "787.bb86e386.chunk.js.map": "/pet_puzzles/static/js/787.bb86e386.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b497bd07.css",
+    "static/js/main.52da989a.js"
+  ]
+}
